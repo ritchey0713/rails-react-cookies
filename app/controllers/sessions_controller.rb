@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController 
+  include CurrentUserConcern
 
   def create 
     @user = User.find_by(email: params["user"]["email"]).try(:authenticate, params["user"]["password"])
@@ -16,12 +17,17 @@ class SessionsController < ApplicationController
   end 
 
   def logged_in 
-
+    if @current_user 
+      render json: {
+        logged_in: true,
+        user: @current_user
+      }
+    end  
   end
 
   def logout 
 
   end 
 
-  
+
 end 
