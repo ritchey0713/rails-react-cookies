@@ -2,7 +2,7 @@ class SessionsController < ApplicationController
   include CurrentUserConcern
 
   def create 
-    @user = User.find_by(email: params["user"]["email"]).try(:authenticate, params["user"]["password"])
+    @user = User.find_by(email: params["email"]).try(:authenticate, params["password"])
 
     if @user
       session[:user_id] = @user.id
@@ -32,7 +32,7 @@ class SessionsController < ApplicationController
   def logout 
     reset_session 
     render json: {
-      statud: 200,
+      status: 200,
       logged_out: true
     }
   end 

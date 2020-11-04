@@ -2,10 +2,15 @@ class PostsController < ApplicationController
 
   def index 
     @posts = Post.all 
-    render json: {
-      status: "loaded",
-      posts: @posts
-    }
+    @tags = Tag.all
+    # render json: {
+    #   status: "loaded",
+    #   posts: @posts,   
+    #     include: {
+    #       tags: @tags
+    #     }
+    # }
+   render json: @posts, include: [:tags]
   end 
 
   def create 
