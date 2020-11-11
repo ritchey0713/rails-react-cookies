@@ -15,18 +15,19 @@ ActiveRecord::Schema.define(version: 2020_10_22_211358) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "posts", force: :cascade do |t|
-    t.string "title"
+  create_table "artists", force: :cascade do |t|
+    t.string "name"
+    t.string "genre"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "tags", force: :cascade do |t|
+  create_table "songs", force: :cascade do |t|
     t.string "title"
-    t.bigint "post_id"
+    t.bigint "artist_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["post_id"], name: "index_tags_on_post_id"
+    t.index ["artist_id"], name: "index_songs_on_artist_id"
   end
 
   create_table "users", force: :cascade do |t|
